@@ -58,16 +58,33 @@ Uspešnost implementiranih modela u klasifikaciji IT tiketa evaluirana je kroz p
 | **Finalna trening preciznost** | >99.5% | **~99.7%** |
 | **Stabilnost validacije** | Oscilacije (E4, E7) | **Visoka (stabilniji trend)** |
 | **Konačna ocena** | Zadovoljavajuća | **Optimalna** |
-
+<p align="center">
+  <img src="model16neurona.PNG" alt="Rezultati modela sa 16 neurona" width="600">
+  <br>
+  <em>Slika 1: Preciznost Baseline modela sa 16 neurona tokom 10 epoha</em>
+</p>
 Model 1 (Baseline): Na grafiku se uočava brz inicijalni skok preciznosti. Međutim, narandžasta kriva (validacija) pokazuje primetnu nestabilnost sa oštrim padovima u 4. i 7. epohi, što ukazuje na to da je jednostavnija arhitektura osetljivija na specifične varijacije u testnim podacima.
 
+<p align="center">
+  <img src="model32neurona.PNG" alt="Rezultati modela sa 32 neurona" width="600">
+  <br>
+  <em>Slika 2: Preciznost optimizovanog modela sa 32 neurona tokom 10 epoha</em>
+</p>
 Model 2 (Optimizovani): Kao što je prikazano na grafiku, ovaj model startuje sa višom preciznošću i održava znatno stabilniji trend učenja. Iako je zabeležen pad u 7. epohi, kriva se brže oporavlja, a finalni rezultati na validacionom skupu su skoro izjednačeni sa trening preciznošću, što potvrđuje bolju sposobnost generalizacije.
 
 ## 7. Diskusija
-Analizom grafika primećuje se da model uči veoma brzo, dostižući visoku preciznost već u prvih nekoliko epoha. Međutim, u 8. epohi zabeležen je pad validacione preciznosti na oko 98.8%, nakon čega se kriva ponovo stabilizuje. Ovo ukazuje na povremenu nestabilnost u procesu optimizacije ili blagi "overfitting" u specifičnim epohama, što je važan uvid za dalje fino podešavanje modela, poput uvođenja Dropout slojeva ili ranog zaustavljanja (Early Stopping).
+Rezultati eksperimenta otkrivaju jasnu dinamiku uticaja širine skrivenog sloja na proces učenja. Analizom dobijenih rezultata možemo izvući sledeće ključne zaključke:
+- Superiornost Modela 2: U našem projektu Model 2 (32 neurona) predstavlja optimalan izbor. Veći broj neurona omogućio je mreži da efikasnije „sabije“ informacije iz Embedding sloja i uoči suptilne semantičke razlike koje odvajaju incidente od običnih zahteva, što rezultira stabilnijom validacionom krivom.
+- Problem debalansa klasa: Uočene oscilacije u 7. epohi na oba grafika su direktna posledica činjenice da incidenti čine čak 71% podataka. Model povremeno „luta“ u potrazi za optimalnom granicom odlučivanja za manjinsku klasu (zahteve), što je tipičan izazov kod ekstremno debalansiranih baza podataka.
+- Analiza robusnosti: Model 2 pokazuje bolju otpornost na šum u podacima. Dok Model 1 pokazuje znake blagog preprilagođavanja (overfittinga) usled nestabilne validacije, Model 2 gradi svoju odluku na robusnijim lingvističkim šablonima, što ga čini pouzdanijim za primenu u realnom sistemu IT podrške.
+- Moguća unapređenja: Iako je preciznost od preko 99% vrhunski rezultat, diskusija o nestabilnosti u pojedinim epohama ukazuje na to da bi sledeći korak mogao biti uvođenje tehnika poput Dropout slojeva ili regularizacije, kako bi se dodatno „ispeglale“ krive učenja i osigurala maksimalna stabilnost modela.
 
 ## 8. Zaključak
-Implementirani model pokazao je izuzetne performanse u klasifikaciji podrške. Sa preciznošću od preko 99%, model predstavlja pouzdano rešenje za automatizaciju obrade tiketa, čime je u potpunosti ispunjen cilj projektnog zadatka.
+U ovom radu implementirane su i evaluirane dve konfiguracije sekvencijalnih neuronskih mreža za automatizovanu klasifikaciju IT podrške, sa fokusom na rešavanje problema trijaže u uslovima realnog debalansa klasa.
+
+Model 2 (sa 32 neurona u skrivenom sloju) pokazao se kao optimalno rešenje za ovaj zadatak. Za razliku od Baseline modela, ova konfiguracija je pokazala veću stabilnost tokom procesa učenja i bolju sposobnost generalizacije na validacionom skupu podataka. Vizuelna analiza kriva učenja potvrdila je da Model 2 brže konvergira i efikasnije obrađuje semantičke obrasce u tekstu, što je rezultiralo preciznošću od preko 99%.
+Ključna lekcija ovog projekta, jeste da stabilno i postepeno učenje granica između klasa, bez preterano agresivnih arhitektonskih intervencija, daje superiorne rezultate. Iako debalans klasa (71% incidenata naspram 29% zahteva) predstavlja izazov, pokazano je da pravilno dimenzionisan skriveni sloj omogućava modelu da uoči suptilne lingvističke razlike koje su neophodne za tačnu klasifikaciju.
+Postignuti rezultati čine ovaj model direktno primenljivim u realnom korporativnom okruženju. Automatizacijom prepoznavanja incidenata i zahteva sa pouzdanošću većom od 99%, drastično se smanjuje vreme odgovora (Response Time) i optimizuju resursi inženjerskih timova, čime je u potpunosti ispunjen primarni cilj projektnog zadatka.
 
 ## Podela rada
 - Ana Marinković: Prikupljanje i preprocesiranje podataka, definisanje arhitekture modela (16 neurona), trening modela (16 neurona) i diskucija rezultata.
