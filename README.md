@@ -92,3 +92,5 @@ Postignuti rezultati čine ovaj model direktno primenljivim u realnom korporativ
 
 ## Licenca
 Ovaj projekat je licenciran pod MIT licencom.
+
+[Link ka prezentaciji](https://canva.link/ls50pnj6gw9j2sq)
