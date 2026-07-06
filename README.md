@@ -55,7 +55,7 @@ Uspešnost implementiranih modela u klasifikaciji IT tiketa evaluirana je kroz p
 | **Metrika / Model** | **Model 1 (16 neurona)** | **Model 2 (32 neurona)** |
 | :--- | :--- | :--- |
 | **Početna preciznost (E0)** | ~92.5% | **~94.0%** |
-| **Finalna trening preciznost** | >99.5% | **~99.7%** |
+| **Finalna trening preciznost** | ~99.67% | **~99.7%** |
 | **Stabilnost validacije** | Oscilacije (E4, E7) | **Visoka (stabilniji trend)** |
 | **Konačna ocena** | Zadovoljavajuća | **Optimalna** |
 <p align="center">
